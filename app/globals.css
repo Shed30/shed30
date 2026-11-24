@@ -1,0 +1,130 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #193b55;
+  --color-navy-deep: #0f2c42;
+  --color-teal: #138a87;
+  --color-teal-dark: #0e6e6c;
+  --color-teal-deeper: #0e5856;
+  --color-teal-light: #4fc1bc;
+  --color-teal-pale: #8fd6d2;
+  --color-teal-wash: #e3f1f0;
+  --color-ink: #343e45;
+  --color-muted: #50575c;
+  --color-pencil: #8c9399;
+  --color-paper: #fdfcf8;
+  --color-cream: #f7f4ec;
+  --color-kraft: #e8e1cf;
+  --color-rule: #d3cab3;
+  --color-dash: #cfc9b9;
+  --color-brass: #8c7a52;
+  --color-brass-light: #b9a57a;
+
+  --font-display: "Manrope", system-ui, sans-serif;
+  --font-body: "Source Sans 3", system-ui, sans-serif;
+  --font-hand: "Caveat", cursive;
+  --font-mono: "Courier New", monospace;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    margin: 0;
+    background-color: var(--color-kraft);
+    font-family: var(--font-body);
+    color: var(--color-ink);
+    font-size: 18px;
+    line-height: 1.6;
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+  }
+  a {
+    color: var(--color-teal-dark);
+  }
+  a:hover {
+    color: var(--color-navy);
+  }
+}
+
+@layer components {
+  /* Page background: faint grid on kraft paper */
+  .bg-notebook {
+    background-color: var(--color-kraft);
+    background-image:
+      linear-gradient(rgba(25, 59, 85, 0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(25, 59, 85, 0.07) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  /* A sheet of paper lying on the desk */
+  .sheet {
+    position: relative;
+    background-color: var(--color-paper);
+    border: 1px solid var(--color-rule);
+    box-shadow:
+      0 1px 1px rgba(70, 55, 30, 0.14),
+      0 4px 8px rgba(70, 55, 30, 0.1),
+      0 18px 36px rgba(70, 55, 30, 0.18);
+  }
+
+  .card-shadow {
+    box-shadow:
+      0 1px 1px rgba(70, 55, 30, 0.14),
+      0 6px 14px rgba(70, 55, 30, 0.14);
+  }
+
+  .grid-paper {
+    background-image:
+      linear-gradient(#e9e5da 1px, transparent 1px),
+      linear-gradient(90deg, #e9e5da 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+
+  .lined-paper {
+    background-image: linear-gradient(transparent 31px, #e8e3d6 32px);
+    background-size: 100% 32px;
+    background-position: 0 70px;
+  }
+
+  .pegboard {
+    background-color: var(--color-navy);
+    background-image: radial-gradient(var(--color-navy-deep) 2.6px, transparent 3.1px);
+    background-size: 26px 26px;
+  }
+
+  .tape {
+    position: absolute;
+    height: 26px;
+    background: rgba(205, 192, 156, 0.85);
+    pointer-events: none;
+  }
+
+  .tool-card {
+    transition:
+      transform 0.15s ease,
+      box-shadow 0.15s ease;
+  }
+  .tool-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 0 rgba(0, 0, 0, 0.22) !important;
+  }
+  .tool-card:focus-visible {
+    outline: 3px solid var(--color-teal-light);
+    outline-offset: 3px;
+  }
+
+  /* Hand-drawn wobble, using the SVG filters in the layout */
+  .sketch-sm {
+    filter: url(#nb-sketch-sm);
+    overflow: visible;
+  }
+  .sketch-lg {
+    filter: url(#nb-sketch-lg);
+    overflow: visible;
+  }
+}
