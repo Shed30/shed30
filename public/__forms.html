@@ -2,13 +2,19 @@
 <html lang="en">
   <head><meta charset="utf-8"><title>Forms</title></head>
   <body>
-    <!-- Netlify reads this file at deploy time to set up the contact form. Do not delete it. -->
+    <!-- Netlify reads this file at deploy time to set up the contact and Design Studio waitlist forms. Do not delete it. -->
     <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
       <input type="hidden" name="form-name" value="contact" />
       <input name="bot-field" />
       <input type="text" name="name" />
       <input type="email" name="email" />
       <textarea name="message"></textarea>
+    </form>
+    <form name="studio-waitlist" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="studio-waitlist" />
+      <input name="bot-field" />
+      <input type="email" name="email" />
+      <input type="text" name="role" />
     </form>
   </body>
 </html>

@@ -1,4 +1,5 @@
 import ContactForm from "@/components/ContactForm";
+import StudioWaitlist from "@/components/StudioWaitlist";
 import ToolShed from "@/components/ToolShed";
 import { CheckBox, HandNote, Pin, PencilUnderline, SectionLabel, SketchArrow, Tape, TornEdge } from "@/components/Decor";
 
@@ -7,6 +8,33 @@ const HIDE_SM = "max-[820px]:hidden!";
 
 const SEC = "mx-auto max-w-[1200px] px-3.5 md:px-8";
 const H2 = "m-0 text-[29px] leading-[1.15] font-extrabold text-navy md:text-[40px] md:leading-[1.12]";
+
+// Quick links under the hero, one for each part of the business.
+const quickLinks = [
+  { href: "#make", n: "01", title: "Services", note: "Made to order, then handed over", tilt: "-rotate-[0.8deg]", tape: "-rotate-[3deg]" },
+  { href: "#work", n: "02", title: "Selected work", note: "Products, games and past projects", tilt: "rotate-[0.6deg]", tape: "rotate-[4deg]" },
+  {
+    href: "#studio",
+    n: "03",
+    title: "Design Studio",
+    note: "My learning design tool, in development",
+    tilt: "-rotate-[0.4deg]",
+    tape: "rotate-[2deg]",
+  },
+  { href: "#courses", n: "04", title: "Ready-made courses", note: "Self-paced, available now", tilt: "rotate-[0.7deg]", tape: "-rotate-[4deg]" },
+];
+
+const studioFeatures: [string, boolean][] = [
+  ["Define the problem and test the request", true],
+  ["Is training the answer?", true],
+  ["Learners, stakeholders and outcomes", true],
+  ["Delivery strategy, with the reasons shown", true],
+  ["Alignment check: taught, practised, checked", true],
+  ["Transfer and evaluation plans", true],
+  ["Export to PDF and Word", true],
+  ["Academy units", false],
+  ["Design mentor", false],
+];
 
 const services = [
   {
@@ -337,6 +365,28 @@ export default function Home() {
           </figure>
         </section>
 
+        {/* QUICK LINKS */}
+        <nav aria-label="Jump to" className={`${SEC} -mt-6 pb-16`}>
+          <ul className="m-0 grid list-none grid-cols-2 gap-x-4 gap-y-6 p-0 md:grid-cols-4 md:gap-x-6">
+            {quickLinks.map((q) => (
+              <li key={q.href}>
+                <a
+                  href={q.href}
+                  className={`card-shadow group relative flex h-full flex-col gap-1 border border-rule bg-paper px-4 pt-6 pb-4 no-underline transition-transform hover:-translate-y-1 hover:rotate-0 focus-visible:rotate-0 md:px-5 ${q.tilt}`}
+                >
+                  <Tape className={`-top-3 left-1/2 -ml-8 h-5 w-16 ${q.tape}`} />
+                  <span className="font-hand text-[19px] leading-none text-pencil">No. {q.n}</span>
+                  <span className="font-display text-lg leading-tight font-extrabold text-navy md:text-xl">{q.title}</span>
+                  <span className="text-[15px] leading-snug text-muted">{q.note}</span>
+                  <span aria-hidden="true" className="mt-auto pt-2 font-display text-lg font-bold text-teal transition-transform group-hover:translate-x-1">
+                    →
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
         {/* SERVICES */}
         <section id="make" className={`${SEC} pt-6 pb-[72px]`}>
           <div className="sheet flex flex-wrap gap-7 border-b-0 px-5 pt-10 pb-[30px] md:gap-12 md:px-12 md:py-14">
@@ -500,6 +550,52 @@ export default function Home() {
 
         {/* TOOLSHED */}
         <ToolShed />
+
+        {/* DESIGN STUDIO */}
+        <section id="studio" className={`${SEC} pb-20`}>
+          <div className="sheet grid-paper relative flex flex-wrap gap-10 px-5 pt-10 pb-[30px] md:gap-14 md:px-12 md:py-14">
+            <Tape className="-top-3 left-16 w-24 -rotate-3" />
+            <Tape className="-top-3 right-20 w-20 rotate-[4deg]" />
+            <div className="flex min-w-0 flex-[1_1_420px] flex-col gap-3.5">
+              <SectionLabel>Inside the toolshed / Being built</SectionLabel>
+              <h2 className={H2}>Learning Design Studio.</h2>
+              <PencilUnderline width={210} />
+              <p className="m-0 max-w-[560px]">
+                The tool I use to design learning, built so other learning designers can use it too. It takes a project
+                from the first request to a plan you can hand over, and it asks the hard questions on the way, starting
+                with whether training is the answer at all.
+              </p>
+              <ul className="m-0 mt-2 grid list-none grid-cols-1 gap-x-6 gap-y-1.5 p-0 font-hand text-[21px] leading-tight text-ink sm:grid-cols-2">
+                {studioFeatures.map(([label, done]) => (
+                  <li key={label} className={`flex items-start gap-2.5 ${done ? "" : "text-muted"}`}>
+                    <span className="mt-0.5 shrink-0">
+                      <CheckBox ticked={done} />
+                    </span>
+                    <span>
+                      {label}
+                      {!done && <span className="sr-only"> (coming later)</span>}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              <HandNote className="mt-2 -rotate-1 text-[22px] leading-[1.2]">
+                Ticked parts are built and being tested. The rest is on the bench.
+              </HandNote>
+            </div>
+            <div className="relative flex min-w-0 flex-[1_1_340px] flex-col">
+              <span className="absolute -top-5 right-2 z-[1] inline-block rotate-6 rounded-[50%] border-2 border-teal bg-paper px-5 py-1 font-hand text-[24px] font-semibold text-teal-dark">
+                In development
+              </span>
+              <div className="card-shadow border border-rule bg-white px-6 pt-8 pb-6">
+                <h3 className="m-0 text-[22px] leading-tight text-navy">Want early access?</h3>
+                <p className="m-0 mt-2 text-base text-muted">
+                  Leave your email and I&apos;ll let you know when the Design Studio opens.
+                </p>
+                <StudioWaitlist />
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* COURSES */}
         <section id="courses" className={`${SEC} pb-20`}>
